@@ -1,4 +1,6 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+
+import appRouter from './routes';
 
 const app = express();
 
@@ -7,16 +9,9 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.get('/', (req: Request, res: Response) => {
-	res.send('<h1>Hello new page');
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-app.get('/about', (req: Request, res: Response) => {
-	res.send('<h1>Hello about page');
-});
-
-app.all('/{*splat}', (req: Request, res: Response) => {
-	res.status(400).send('<h1>Not found');
-});
+app.use('/', appRouter);
 
 app.listen(3000, () => console.log('Hello'));
