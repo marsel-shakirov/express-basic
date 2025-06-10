@@ -11,7 +11,6 @@ export const getAllTodos = (req: Request, res: Response) => {
 };
 
 export const getTodoById = (req: Request, res: Response) => {
-	console.log(req.params);
 	const id = +req.params.id;
 
 	const todo = todos.find(todo => todo.id === id);
